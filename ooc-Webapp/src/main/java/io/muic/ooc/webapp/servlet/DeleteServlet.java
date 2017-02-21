@@ -23,14 +23,25 @@ public class DeleteServlet extends HttpServlet {
     private MySQLService mySQLService;
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/login.jsp");
+        String username = (String) request.getSession()
+                .getAttribute("username");
+        System.out.println("USER"+username);
+        rd.include(request, response);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("Delete");
-        System.out.println("YEAHHHHHHHH"+username);
+        String usernameFromSession = (String) request.getSession()
+                .getAttribute("username");
+        System.out.println("YEAHHHHHHHH" + username);
         try {
-            mySQLService.deleteDataBase(username);
-        } catch (Exception e){
-
-        }
+            if (!usernameFromSession.equals(username)) {
+                mySQLService.deleteDataBase(username);
+            }
+        } catch (Exception e) {}
         response.sendRedirect("/");
     }
 

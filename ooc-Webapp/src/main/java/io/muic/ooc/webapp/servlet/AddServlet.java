@@ -24,11 +24,22 @@ import java.io.IOException;
 public class AddServlet extends HttpServlet {
 
     private MySQLService mySQLService;
+    private SecurityService securityService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/add.jsp");
-        rd.include(request, response);
+        try {
+            boolean authorized = securityService.isAuthorized(request);
+            if (authorized) {
+                // do MVC in here
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/add.jsp");
+                rd.include(request, response);
+            } else {
+                response.sendRedirect("/login");
+            }
+        }catch (Exception e){
+
+        }
     }
 
     @Override
@@ -64,4 +75,5 @@ public class AddServlet extends HttpServlet {
     public void setMySQLService(MySQLService mySQLService) {
         this.mySQLService = mySQLService;
     }
+    public void setSecurityService(SecurityService securityService) {this.securityService = securityService;}
 }

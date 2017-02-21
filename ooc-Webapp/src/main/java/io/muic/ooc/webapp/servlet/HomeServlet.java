@@ -28,9 +28,12 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            String usernameFromSession = (String) request.getSession()
+                    .getAttribute("username");
             boolean authorized = securityService.isAuthorized(request);
             if (authorized) {
                 // do MVC in here
+                request.setAttribute("currentUser", usernameFromSession);
                 RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/home.jsp");
                 rd.include(request, response);
             } else {

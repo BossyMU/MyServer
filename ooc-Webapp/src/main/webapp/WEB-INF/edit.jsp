@@ -15,7 +15,7 @@
     <input type="hidden" name="usernameEdit" value="${username}">
     <input type="submit" value="Submit">
 </form>
-<form action="/login" method="get">
+<form action="/" method="get">
     <input type="submit" value="Cancel">
 </form>
 </body>

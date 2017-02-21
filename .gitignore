@@ -1,0 +1,5 @@
+/ooc-Webapp/*.iml
+/ooc-Webapp/target
+/ooc-Webapp/.idea*
+/ooc-Webapp/.DS_Store
+/ooc-Webapp/*.yml

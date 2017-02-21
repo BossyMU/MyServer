@@ -65,6 +65,7 @@ public class ServletRouter {
     private void initAdd(Context ctx) {
         AddServlet addServlet = new AddServlet();
         addServlet.setMySQLService(mySQLService);
+        addServlet.setSecurityService(securityService);
         Tomcat.addServlet(ctx, "AddServlet", addServlet);
         ctx.addServletMapping("/add", "AddServlet");
     }

@@ -48,6 +48,7 @@
         <%--<input type="hidden" name="Add" value="${row.username}">--%>
         <input type="submit" value="Add">
     </form>
+    <h1>Current User: ${currentUser}</h1>
 </table>
 
 </body>
